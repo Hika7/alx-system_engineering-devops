@@ -1,0 +1,21 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    add_header X-Served-By gc-1406-web-01-1596624589;
+
+    index  index.html index.htm;
+
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
+
+    location /airbnb-onepage {
+      proxy_pass  http://localhost:5000/airbnb-onepage; }
+}
